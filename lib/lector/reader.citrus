@@ -53,7 +53,7 @@ grammar Lector::RubyParse
   end
 
   rule number
-    integer | hex_integer | octal_integer | float
+    integer | hex_integer | float
   end
 
   rule integer
