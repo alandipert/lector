@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lector (0.0.4)
+    lector (0.0.5)
       citrus
 
 GEM
