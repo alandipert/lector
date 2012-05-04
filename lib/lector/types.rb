@@ -5,6 +5,7 @@ module Lector
     module Nil; def val; nil; end; end
     module Integer; def val; to_i; end; end
     module HexInteger; def val; to_i 16; end; end
+    module OctalInteger; def val; to_i 8; end; end
     module Float; def val; to_f; end; end
     module SimpleSymbol; def val; slice(1..-1).to_sym; end; end
     module StringSymbol; def val; slice(2..-2).to_sym; end; end

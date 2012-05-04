@@ -1,0 +1,19 @@
+grammar Lector::Digits
+
+  rule digit
+    [0-9] ('_' & [0-9])?
+  end
+
+  rule nonzero
+    [1-9] ('_' & [0-9])?
+  end
+
+  rule hexdigit
+    [1-9a-fA-F] ('_' & [0-9a-fA-F])?
+  end
+
+  rule octaldigit
+    [0-7] ('_' & [0-7])?
+  end
+
+end

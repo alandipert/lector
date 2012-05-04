@@ -2,6 +2,7 @@ require 'citrus'
 require 'lector/types'
 
 module Lector
+  Citrus.load('lib/lector/digits', :force => true)
   Citrus.load('lib/lector/reader', :force => true)
 end
 

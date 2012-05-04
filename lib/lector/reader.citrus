@@ -1,5 +1,7 @@
 grammar Lector::RubyParse
 
+  include Lector::Digits
+
   rule ruby_data
     (space* form space*) <Lector::Types::Data>
   end
@@ -53,24 +55,27 @@ grammar Lector::RubyParse
   end
 
   rule number
-    hex_integer | float | integer
+    hex_integer | float | integer | octal_integer
   end
 
   rule integer
-    /([-+]?0)|([-+]?[1-9]\d*)/ <Lector::Types::Integer>
+    ([+-]? ('0' | nonzero digit*)) <Lector::Types::Integer>
   end
 
   rule hex_integer
-    /([-+]?)0[xX]([0-9A-Fa-f]+)/ <Lector::Types::HexInteger>
+    ([+-]? `0x` hexdigit+) <Lector::Types::HexInteger>
+  end
+
+  rule octal_integer
+    ([+-]? '0' octaldigit+) <Lector::Types::OctalInteger>
   end
 
   rule float
-    ((number:/[-+]?[0-9]+\.[0-9]+(?:[eE][-+]?[0-9]+)?/)
-     | (number:/[-+]?[0-9][eE][-+]?[0-9]+/)) <Lector::Types::Float>
+    (integer '.' digit+ (`e` integer)?
+     | integer `e` integer) <Lector::Types::Float>
   end
 
   rule array
-    #TODO: Spurious commas should be parse errors.
     ('['
      ((space* form space* ',')* (space* form space*)?)
      ']') <Lector::Types::Array>
