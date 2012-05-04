@@ -14,7 +14,7 @@
 ```
 # read-eval is off by default:
 > Lector::read_s("{three: #='1+2'}")
- => {:three=>nil}
+ => {:three=>"1+2"}
 
 # but you can turn it on...
 > Lector::read_s("{three: #='1+2'}", :read_eval => true)
