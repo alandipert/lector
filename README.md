@@ -1,6 +1,17 @@
-# lector
-
 `lector` reads Ruby data as a string or from a file without evaluating any code.
+
+# Usage
+
+```
+> require 'lector'
+ => true
+> Lector::read_s("{x: 11, :pants? => false}")
+ => {:x=>11, :pants?=>false} 
+```
+
+Please see the
+[tests](https://github.com/alandipert/lector/tree/master/spec/lector)
+for more usage examples.
 
 # Rationale
 
