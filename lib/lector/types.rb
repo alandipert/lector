@@ -16,7 +16,7 @@ module Lector
         if $_LECTOR_READ_EVAL
           eval(to_s.slice(3..-2))
         else
-          to_s.slice(3..-2)
+          raise RuntimeError, "Evaluation isn't allowed if :read_eval is false"
         end
       end
     end

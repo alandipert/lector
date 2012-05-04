@@ -91,14 +91,21 @@ describe Lector do
     it 'preserves other escaped characters' do
       Lector::read_s('"a string with a\nnewline"').should == 'a string with a\nnewline'
     end
+
+    it 'deals with comments' do
+      Lector::read_s("{#Here's a comment in the code.\nx: #And another!\n10}").
+        should == {:x => 10}
+    end
   end
 
   context 'read-evaling' do
-    it "returns the code when read-eval is off" do
-      Lector::read_s("#='1+2'").should == '1+2'
+    it "blows up when read-eval is off and there's embedded code" do
+      expect {
+        Lector::read_s("#='1+2'").should == '1+2'
+      }.to raise_error(RuntimeError)
     end
 
-    it "evals the code when read-eval is on" do
+    it "embedded code works when :read_eval is on" do
       Lector::read_s("#='1+2'", :read_eval => true).should == 3
     end
 
