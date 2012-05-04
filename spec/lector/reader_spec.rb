@@ -94,10 +94,10 @@ describe Lector do
   end
 
   context 'read-evaling' do
-    it "shouldn't eval the code" do
-      Lector::read_s("#='1+2'").should == nil
+    it "returns the code when read-eval is off" do
+      Lector::read_s("#='1+2'").should == '1+2'
     end
-    it "should eval the code" do
+    it "evals the code when read-eval is on" do
       Lector::read_s("#='1+2'", :read_eval => true).should == 3
     end
 
