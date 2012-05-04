@@ -72,7 +72,7 @@ grammar Lector::RubyParse
   rule array
     #TODO: Spurious commas should be parse errors.
     ('['
-     ((space* form space* ',')* (space* form space*))
+     ((space* form space* ',')* (space* form space*)?)
      ']') <Lector::Types::Array>
   end
 

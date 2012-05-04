@@ -57,6 +57,14 @@ describe Lector do
       Lector::read_s("[42, -1]").should == [42, -1]
     end
 
+    it 'fails to parse arrays with spurious commas' do
+      expect { Lector::read_s('[1,,2]') }.to raise_error(Citrus::ParseError)
+    end
+
+    it 'allows trailing commas in arrays' do
+      Lector::read_s('[1,2,]').should == [1,2]
+    end
+
     it 'parses hashes' do
       Lector::read_s("{a: 7, b: 6}").should == {:a => 7, :b => 6}
       Lector::read_s("{b: 6}").should == {:b => 6}
