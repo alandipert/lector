@@ -29,6 +29,14 @@ describe Lector do
       expect { Lector::read_s("1.e5") }.to raise_error(Citrus::ParseError)
     end
 
+    it "allows for underscores in integers" do
+      Lector::read_s("1_0").should == 10
+      Lector::read_s("1_03_4").should == 1034
+      expect { Lector::read_s("_1_03_4") }.to raise_error(Citrus::ParseError)
+      expect { Lector::read_s("1_03_4_") }.to raise_error(Citrus::ParseError)
+      expect { Lector::read_s("1__03_4") }.to raise_error(Citrus::ParseError)
+    end
+
     it "parses true and false" do
       Lector::read_s("true").should == true
       Lector::read_s("false").should == false
