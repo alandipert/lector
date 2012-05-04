@@ -21,11 +21,15 @@ grammar Lector::RubyParse
   end
 
   rule string
-    ("\"" content:string_content* "\"") <Lector::Types::String>
+    single_quoted_string | double_quoted_string
   end
 
-  rule string_content
-    (/[^"\\]/ | /\\./)
+  rule double_quoted_string
+    ("\"" content:(/[^"\\]/ | /\\./)* "\"") <Lector::Types::String>
+  end
+
+  rule single_quoted_string
+    ("'" content:(/[^'\\]/ | /\\./)* "'") <Lector::Types::String>
   end
 
   rule symbol

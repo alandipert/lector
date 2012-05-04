@@ -48,6 +48,7 @@ describe Lector do
       read_s(":sym").should == :sym
       read_s(':"blah"').should == :blah
       read_s(':"blah blah"').should == :"blah blah"
+      read_s(":'foo foo'").should == :"foo foo"
     end
 
     it 'parses arrays of single elements' do
@@ -83,8 +84,12 @@ describe Lector do
 {a: 7, b: 6}   ").should == {:a => 7, :b => 6}
     end
 
-    it 'reads strings' do
+    it 'reads double-quoted strings' do
       read_s('"a string by any other name is just as tangly"').should == 'a string by any other name is just as tangly'
+    end
+
+    it 'reads single-quoted strings' do
+      read_s("'i only have single quotes'").should == 'i only have single quotes'
     end
 
     it 'reads strings with escaped quotes' do
