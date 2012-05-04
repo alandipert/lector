@@ -14,9 +14,17 @@ describe Lector do
     end
 
     it "parses hex integers" do
+      Lector::read_s("0x0").should == 0
       Lector::read_s("0xF").should == 15
       Lector::read_s("+0xF").should == 15
       Lector::read_s("-0xF").should == -15
+    end
+
+    it "parses ocatals" do
+      Lector.read_s("00").should == 0
+      Lector.read_s("010").should == 8
+      Lector.read_s("-010").should == -8
+      Lector.read_s("+010").should == 8
     end
 
     it "parses floating point numbers" do
@@ -29,12 +37,41 @@ describe Lector do
       expect { Lector::read_s("1.e5") }.to raise_error(Citrus::ParseError)
     end
 
-    it "allows for underscores in integers" do
-      Lector::read_s("1_0").should == 10
-      Lector::read_s("1_03_4").should == 1034
-      expect { Lector::read_s("_1_03_4") }.to raise_error(Citrus::ParseError)
-      expect { Lector::read_s("1_03_4_") }.to raise_error(Citrus::ParseError)
-      expect { Lector::read_s("1__03_4") }.to raise_error(Citrus::ParseError)
+    context "parsing individual underscores in the middle of numbers" do
+      it "in integers" do
+        Lector::read_s("1_0").should == 10
+        Lector::read_s("1_03_4").should == 1034
+        expect { Lector::read_s("1_03_4_") }.to raise_error(Citrus::ParseError)
+        expect { Lector::read_s("1__03_4") }.to raise_error(Citrus::ParseError)
+      end
+
+      it "in octals" do
+        Lector::read_s("0_1_0").should == 010
+        Lector::read_s("0_1_03_4").should == 01034
+        expect { Lector::read_s("0_1_03_4_") }.to raise_error(Citrus::ParseError)
+        expect { Lector::read_s("0_1__03_4") }.to raise_error(Citrus::ParseError)
+      end
+
+      it "in hex" do
+        Lector::read_s("0x3_f_0").should == 0x3F0
+        Lector::read_s("0x1_0D_4").should == 0x10D4
+        expect { Lector::read_s("0x1_03_4_") }.to raise_error(Citrus::ParseError)
+        expect { Lector::read_s("0x_1_03_4") }.to raise_error(Citrus::ParseError)
+        expect { Lector::read_s("0x1__03_4") }.to raise_error(Citrus::ParseError)
+      end
+
+      it "in floats" do
+        Lector.read_s("1_0.2_3").should == 10.23
+        Lector.read_s("1_0.2_3e4_5").should == 10.23e45
+        expect { Lector.read_s("1__0.2") }.to raise_error(Citrus::ParseError)
+        expect { Lector.read_s("_1_0.2") }.to raise_error(Citrus::ParseError)
+        expect { Lector.read_s("1._2") }.to raise_error(Citrus::ParseError)
+        expect { Lector.read_s("1.1__2") }.to raise_error(Citrus::ParseError)
+        expect { Lector.read_s("1.2_") }.to raise_error(Citrus::ParseError)
+        expect { Lector.read_s("1.2e1__3") }.to raise_error(Citrus::ParseError)
+        expect { Lector.read_s("1.2e_3") }.to raise_error(Citrus::ParseError)
+        expect { Lector.read_s("1.2e3_") }.to raise_error(Citrus::ParseError)
+      end
     end
 
     it "parses true and false" do

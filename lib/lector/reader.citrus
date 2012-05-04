@@ -55,7 +55,7 @@ grammar Lector::RubyParse
   end
 
   rule number
-    hex_integer | float | integer | octal_integer
+    hex_integer | float | octal_integer | integer
   end
 
   rule integer
@@ -67,7 +67,7 @@ grammar Lector::RubyParse
   end
 
   rule octal_integer
-    ([+-]? '0' octaldigit+) <Lector::Types::OctalInteger>
+    ([+-]? octalzero octaldigit+) <Lector::Types::OctalInteger>
   end
 
   rule float

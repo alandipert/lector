@@ -9,11 +9,15 @@ grammar Lector::Digits
   end
 
   rule hexdigit
-    [1-9a-fA-F] ('_' & [0-9a-fA-F])?
+    [0-9a-fA-F] ('_' & [0-9a-fA-F])?
   end
 
   rule octaldigit
     [0-7] ('_' & [0-7])?
+  end
+
+  rule octalzero
+    '0' ('_' & [0-7])?
   end
 
 end
