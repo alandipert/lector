@@ -1,0 +1,88 @@
+grammar Lector::RubyParse
+
+  rule ruby_data
+    (space* form space*) <Lector::Types::Data>
+  end
+
+  rule form
+    array | hash | literal
+  end
+
+  rule literal
+    nil | boolean | string | symbol | hashkey | number
+  end
+
+  rule nil
+    "nil" <Lector::Types::Nil>
+  end
+
+  rule boolean
+    ("true" | "false") <Lector::Types::Boolean>
+  end
+
+  rule string
+    ("\"" content:string_content* "\"") <Lector::Types::String>
+  end
+
+  rule string_content
+    (/[^"\\]/ | /\\./)
+  end
+
+  rule symbol
+    simple_symbol | string_symbol
+  end
+
+  rule simple_symbol
+    (":" symbol_content) <Lector::Types::SimpleSymbol>
+  end
+
+  rule symbol_content
+    /[a-zA-Z!_][a-zA-Z0-9_]*[\?!]?/
+  end
+
+  rule string_symbol
+    (":" string) <Lector::Types::StringSymbol>
+  end
+
+  rule number
+    hex_integer | float | integer
+  end
+
+  rule hex_integer
+    /([-+]?)0[xX]([0-9A-Fa-f]+)?/ <Lector::Types::HexInteger>
+  end
+
+  rule float
+    ((number:/[-+]?[0-9]+\.[0-9]*(?:[eE][-+]?[0-9]+)?/)
+     | (number:/[-+]?[0-9][eE][-+]?[0-9]+/)) <Lector::Types::Float>
+  end
+
+  rule integer
+    /([-+]?0)|([-+]?[1-9]\d*)?/ <Lector::Types::Integer>
+  end
+
+  rule array
+    #TODO: Spurious commas should be parse errors.
+    ('['
+     ((space* form space* ',')* (space* form space*))
+     ']') <Lector::Types::Array>
+  end
+
+  rule hash
+    #TODO: Spurious commas should be parse errors.
+    ('{'
+     (((space* form space* '=>' space* form space* ',') |
+       (space* form ':' space* form space* ','))*
+      ((space* form space* '=>' space* form space*) |
+       (space* form ':' space* form space*)))
+     '}') <Lector::Types::Hash>
+  end
+
+  rule hashkey
+    #TODO: Kludge - this shouldn't be a standalone terminal.
+    symbol_content <Lector::Types::HashKey>
+  end
+
+  rule space [ \t\n\r] end
+
+end
