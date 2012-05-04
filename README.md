@@ -1,4 +1,6 @@
-`lector` reads Ruby data from strings or files without necessarily evaluating either.  [![Build Status](https://secure.travis-ci.org/alandipert/lector.png)](http://travis-ci.org/alandipert/lector)
+`lector` reads Ruby data from strings or files without necessarily evaluating either.
+
+Oh yeah, and the build status?  We have one of those: [![Build Status](https://secure.travis-ci.org/alandipert/lector.png)](http://travis-ci.org/alandipert/lector)
 
 # Usage
 
