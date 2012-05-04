@@ -9,7 +9,7 @@ grammar Lector::RubyParse
   end
 
   rule literal
-    nil | boolean | string | symbol | hashkey | number
+    nil | boolean | string | code | symbol | hashkey | number
   end
 
   rule nil
@@ -30,6 +30,10 @@ grammar Lector::RubyParse
 
   rule single_quoted_string
     ("'" content:(/[^'\\]/ | /\\./)* "'") <Lector::Types::String>
+  end
+
+  rule code
+    ("#=" code:string) <Lector::Types::Code>
   end
 
   rule symbol

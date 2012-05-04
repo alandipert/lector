@@ -11,6 +11,14 @@ module Lector
     module HashKey; def val; to_sym; end; end
     module String; def val; captures[:content].first.gsub(/\\\"/,"\""); end; end
 
+    module Code
+      def val
+        if $_LECTOR_READ_EVAL
+          eval(code.to_s.slice(3..-2))
+        end
+      end
+    end
+
     module Array
       def val
         captures[:form].map(&:val)

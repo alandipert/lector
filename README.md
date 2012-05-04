@@ -2,11 +2,23 @@
 
 # Usage
 
+## Reading Strings
 ```
 > require 'lector'
  => true
 > Lector::read_s("{x: 11, :pants? => false}")
  => {:x=>11, :pants?=>false} 
+```
+
+## Read-Eval
+```
+# read-eval is off by default:
+> Lector::read_s("{three: #='1+2'}")
+ => {:three=>nil}
+
+# but you can turn it on...
+> Lector::read_s("{three: #='1+2'}", :read_eval => true)
+ => {:three=>3} 
 ```
 
 Please see the
