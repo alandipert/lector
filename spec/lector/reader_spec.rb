@@ -25,6 +25,8 @@ describe Lector do
       Lector::read_s("-1.21e10").should == -12_100_000_000.0
       Lector::read_s("+1.21e10").should == 12_100_000_000.0
       Lector::read_s("1e4").should == 10_000
+      expect { Lector::read_s("1.") }.to raise_error(Citrus::ParseError)
+      expect { Lector::read_s("1.e5") }.to raise_error(Citrus::ParseError)
     end
 
     it "parses true and false" do
