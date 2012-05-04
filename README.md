@@ -14,9 +14,9 @@
 ```
 # read-eval is off by default:
 > Lector::read_s("{three: #='1+2'}")
- => {:three=>"1+2"}
+RuntimeError: Evaluation isn't allowed if :read_eval is false
 
-# but you can turn it on...
+# but when you turn it on...
 > Lector::read_s("{three: #='1+2'}", :read_eval => true)
  => {:three=>3} 
 ```
