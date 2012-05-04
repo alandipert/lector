@@ -53,20 +53,20 @@ grammar Lector::RubyParse
   end
 
   rule number
-    hex_integer | float | integer
+    integer | hex_integer | octal_integer | float
+  end
+
+  rule integer
+    /([-+]?0)|([-+]?[1-9]\d*)/ <Lector::Types::Integer>
   end
 
   rule hex_integer
-    /([-+]?)0[xX]([0-9A-Fa-f]+)?/ <Lector::Types::HexInteger>
+    /([-+]?)0[xX]([0-9A-Fa-f]+)/ <Lector::Types::HexInteger>
   end
 
   rule float
     ((number:/[-+]?[0-9]+\.[0-9]*(?:[eE][-+]?[0-9]+)?/)
      | (number:/[-+]?[0-9][eE][-+]?[0-9]+/)) <Lector::Types::Float>
-  end
-
-  rule integer
-    /([-+]?0)|([-+]?[1-9]\d*)?/ <Lector::Types::Integer>
   end
 
   rule array
