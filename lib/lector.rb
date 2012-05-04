@@ -6,12 +6,11 @@ module Lector
 end
 
 module Lector
-  module RubyParse
-    def self.read_s(string)
-      parse(string).val
-    end
-    def self.read_file(file)
-      parse(File.read(file)).val
-    end
+  module RubyParse; end
+  def self.read_s(string)
+    Lector::RubyParse::parse(string).val
+  end
+  def self.read_file(file)
+    Lector::RubyParse::parse(File.read(file)).val
   end
 end

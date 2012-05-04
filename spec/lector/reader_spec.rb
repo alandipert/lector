@@ -3,11 +3,11 @@ require 'pry'
 require 'tempfile'
 
 def read_s(string)
-  Lector::RubyParse::read_s(string)
+  Lector::read_s(string)
 end
 
 def read_file(file)
-  Lector::RubyParse::read_file(file)
+  Lector::read_file(file)
 end
 
 describe Lector do
