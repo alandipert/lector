@@ -97,10 +97,14 @@ describe Lector do
     it "returns the code when read-eval is off" do
       Lector::read_s("#='1+2'").should == '1+2'
     end
+
     it "evals the code when read-eval is on" do
       Lector::read_s("#='1+2'", :read_eval => true).should == 3
     end
 
+    it "copes when strings have comments" do
+      Lector::read_s("[:a#some comment\n,:b,:c]").should == [:a, :b, :c]
+    end
   end
 
   context 'reading files' do

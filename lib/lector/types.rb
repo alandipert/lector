@@ -14,9 +14,9 @@ module Lector
     module Code
       def val
         if $_LECTOR_READ_EVAL
-          eval(code.to_s.slice(3..-2))
+          eval(to_s.slice(3..-2))
         else
-          code.to_s.slice(3..-2)
+          to_s.slice(3..-2)
         end
       end
     end

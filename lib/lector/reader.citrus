@@ -33,7 +33,7 @@ grammar Lector::RubyParse
   end
 
   rule code
-    ("#=" code:string) <Lector::Types::Code>
+    ("#=" string) <Lector::Types::Code>
   end
 
   rule symbol
