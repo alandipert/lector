@@ -5,10 +5,11 @@ require "lector/version"
 Gem::Specification.new do |s|
   s.name        = "lector"
   s.version     = Lector::VERSION
-  s.authors     = ["Alan Dipert", "Michael Fogus", "Alex Redington"]
-  s.email       = ["alan@dipert.org"]
+  s.authors     = ["Alan Dipert", "Jon Distad", "Michael Fogus", "Alex Redington"]
+  s.email       = ["alan@dipert.org", "jon.distad@gmail.com"]
   s.homepage    = "http://github.com/alandipert/lector"
   s.summary     = %q{A Ruby data reader.}
+  s.license     = "BSD-new"
   s.description = %q{lector parses Ruby data into Ruby data structures.}
 
   s.rubyforge_project = "lector"
