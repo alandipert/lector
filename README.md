@@ -1,4 +1,4 @@
-`lector` reads Ruby data as a string or from a file without evaluating any code.
+`lector` reads Ruby data as a string or from a file without evaluating the code it reads.
 
 # Usage
 
