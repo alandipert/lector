@@ -157,9 +157,7 @@ Rns::using [Lector, [:read_s, :read_file]] do
 
     context 'read-evaling' do
       it "blows up when read-eval is off and there's embedded code" do
-        expect {
-          read_s("#='1+2'").should == '1+2'
-        }.to raise_error(RuntimeError)
+        expect { read_s("#='1+2'") }.to raise_error(RuntimeError)
       end
 
       it "embedded code works when :read_eval is on" do
