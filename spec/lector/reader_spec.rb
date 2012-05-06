@@ -3,7 +3,7 @@ require 'pry'
 require 'tempfile'
 require 'rns'
 
-Rns::using [Lector, [:read_s, :read_file]] do
+Rns::using(Lector => [:read_s, :read_file]) do
   describe Lector do
     context 'reading strings' do
       it 'parses integers' do
