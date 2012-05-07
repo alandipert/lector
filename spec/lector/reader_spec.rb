@@ -100,6 +100,10 @@ Rns::using(Lector => [:read_s, :read_file]) do
         read_s("[ 42   ]").should == [42]
       end
 
+      it 'parses empty arrays' do
+        read_s("[]").should == []
+      end
+
       it 'parses arrays of multiple elements' do
         read_s("[42, -1]").should == [42, -1]
       end
@@ -117,6 +121,10 @@ Rns::using(Lector => [:read_s, :read_file]) do
         read_s("{b: 6}").should == {:b => 6}
         read_s("{:a => 7, :b => 6}").should == {:a => 7, :b => 6}
         read_s("{:a => 7, b: 6}").should == {:a => 7, :b => 6}
+      end
+
+      it 'parses empty hashes' do
+        read_s("{}").should == {}
       end
 
       it 'parses nested collections' do

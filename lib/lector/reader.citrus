@@ -83,12 +83,13 @@ grammar Lector::RubyParse
 
   rule hash
     #TODO: Spurious commas should be parse errors.
-    ('{'
-     (((space* form space* '=>' space* form space* ',') |
-       (space* form ':' space* form space* ','))*
-      ((space* form space* '=>' space* form space*) |
-       (space* form ':' space* form space*)))
-     '}') <Lector::Types::Hash>
+    (('{' space* '}') |
+     ('{'
+      (((space* form space* '=>' space* form space* ',') |
+        (space* form ':' space* form space* ','))*
+       ((space* form space* '=>' space* form space*) |
+        (space* form ':' space* form space*)))
+      '}')) <Lector::Types::Hash>
   end
 
   rule hashkey
