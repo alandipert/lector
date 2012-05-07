@@ -8,6 +8,7 @@ end
 
 module Lector
   module RubyParse; end
+  module Digits; end
   def self.read_s(string, opts = {})
     $_LECTOR_READ_EVAL = opts[:read_eval] || false
     string_without_comments = $_LECTOR_READ_EVAL ? string : string.gsub(/#[^=].*$/, '')
