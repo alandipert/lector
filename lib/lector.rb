@@ -2,8 +2,9 @@ require 'citrus'
 require 'lector/types'
 
 module Lector
-  Citrus.load('lib/lector/digits', :force => true)
-  Citrus.load('lib/lector/reader', :force => true)
+  ['digits', 'reader'].each do |grammar|
+    Citrus.load(File.join(File.dirname(__FILE__), 'lector', grammar), :force => true)
+  end
 end
 
 module Lector
